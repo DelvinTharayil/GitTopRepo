@@ -2,9 +2,13 @@ const main = document.getElementById("main");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 const showApiData = document.getElementById("apiData");
+const loaderBar = document.getElementById("loader");
+const bodyoverflow = document.getElementsByTagName('body')[0]
 
 
-getTrendingListOfRepositories()
+window.onload = function () {
+    getTrendingListOfRepositories()
+}
 
 async function getTrendingListOfRepositories() {
 
@@ -19,8 +23,8 @@ async function getTrendingListOfRepositories() {
         .then((data) => {
             console.log(data)
             const apiTrendingData = data.items
-            
-            showApiData.innerHTML = apiTrendingData.map(datashow).join("") 
+            loaderBar.classList.add("hideloader")
+            showApiData.innerHTML = apiTrendingData.map(datashow).join("")
 
         })
         .catch((err) => {
@@ -38,11 +42,8 @@ async function searchRepository(userQuery) {
 
             console.log(data)
             const apiData = data.items
-            
-  
-        showApiData.innerHTML = apiData.map(datashow).join("") 
-
-
+            removeloader()
+            showApiData.innerHTML = apiData.map(datashow).join("")
 
         })
         .catch((err) => {
@@ -50,6 +51,18 @@ async function searchRepository(userQuery) {
         })
 
 }
+
+
+function addloader() {
+    bodyoverflow.classList.add("stop-scrolling");
+    loaderBar.classList.remove("hideloader")
+};
+
+function removeloader() {
+    bodyoverflow.classList.remove("stop-scrolling");
+    loaderBar.classList.add("hideloader");
+};
+
 
 function datashow(repo) {
     return `  
@@ -64,8 +77,8 @@ function datashow(repo) {
     <div class="Owner"><b>Owner:</b>${repo.owner.login}</div>
 
     <div class="buttons">
-        <button><a href="${repo.clone_url}">Repository</a></button>
-        <button><a href="${repo.owner.html_url}">Profile</a></button>
+        <button><a href="${repo.clone_url}" target="_blank" >Repository</a></button>
+        <button><a href="${repo.owner.html_url}" target="_blank" >Profile</a></button>
     </div>
 
     <div class="social-share">
@@ -89,7 +102,7 @@ function datashow(repo) {
 </div>
     `
 
-    }
+}
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -98,4 +111,5 @@ form.addEventListener("submit", (e) => {
         searchRepository(userQuery);
         search.value = "";
     }
+    addloader()
 });

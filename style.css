@@ -9,6 +9,12 @@
   body{
       font-family: sans-serif;
   }
+
+  body.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+  }
+
   header{
       position: fixed;
       top: 0;
@@ -21,6 +27,64 @@
       border-top: solid 2px rgb(68, 96, 206);
   }
 
+#loader
+{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(222, 222, 222, 0.482);
+}
+  .cm-spinner {
+    height: 150px;
+    width: 150px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    border-top: 4px solid rgb(5, 40, 181);
+    animation: spin 2s linear infinite;
+    position: relative;
+  }
+  
+  .cm-spinner::before,
+  .cm-spinner::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+  }
+  
+  .cm-spinner::before {
+    border-top-color: #386ffa;
+    animation: 3s spin linear infinite;
+  }
+  
+  .cm-spinner::after {
+    border-top-color: #62a8fe;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+ #loader.hideloader{
+  visibility: hidden;
+}
 
  input {
     width: 300px;
