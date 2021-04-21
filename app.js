@@ -34,9 +34,8 @@ async function getTrendingListOfRepositories() {
         .then((data) => {
             console.log(data)
             const apiTrendingData = data.items
-            showApiData.innerHTML = apiTrendingData.map(datashow).join("")
             removeloader()
-
+            showApiData.innerHTML = apiTrendingData.map(datashow).join("")
         })
         .catch((err) => {
         })
@@ -53,7 +52,7 @@ async function searchRepository(userQuery) {
 
             console.log(data)
             const apiData = data.items
-
+            removeloader()
             if (apiData.length == 0) {
                 showApiData.innerHTML =
                     `
@@ -64,7 +63,6 @@ async function searchRepository(userQuery) {
             else{
             showApiData.innerHTML = apiData.map(datashow).join("")
             }
-            removeloader()
         })
         .catch((err) => {
 
