@@ -56,7 +56,6 @@ async function searchRepository(userQuery) {
                     `
                     <img class="noResult" src="assets/SearchNotFound.svg" alt="Search Not Found">
                     `
-                console.log("page not found")
             }
             else{
             showApiData.innerHTML = apiData.map(datashow).join("")
