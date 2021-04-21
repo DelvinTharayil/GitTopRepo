@@ -6,14 +6,11 @@
     box-sizing: border-box;
   }
 
-  body{
+ html , body{
       font-family: sans-serif;
+      min-width: 370px;
   }
 
-  body.stop-scrolling {
-    height: 100%;
-    overflow: hidden;
-  }
 
   header{
       position: fixed;
@@ -22,14 +19,17 @@
       width: 100%;
       height: 100px;
       display:flex ;
-      justify-content: start;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0% 2%;
       background-color: rgb(162, 195, 255) !important;
-      border-top: solid 2px rgb(68, 96, 206);
+      border: none !important;
+      border-top: solid 2px rgb(68, 96, 206) !important;
   }
 
 #loader
 {
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
@@ -88,31 +88,56 @@
 
  input {
     width: 300px;
-    margin: 8%  8%  8% 19% ;
+    height:50px;
     background-color: #ebebeb;
     border-radius: 10px;
-    border-bottom: solid 2px rgb(192, 214, 255);
+    border: solid 2px rgb(192, 214, 255);
+    border-style: none solid solid solid ;
     box-shadow: 0 5px 10px rgba(36, 36, 36, 0.05),
         0 15px 40px rgba(0, 0, 0, 0.1);
     color: rgb(26, 34, 45);
     font-family: inherit;
     font-size: 0.8rem;
     padding: 1rem;
-    margin-bottom: 2rem;
   }
   
   input::placeholder {
     color: rgb(102, 127, 159);
   }
 
+
+  nav .nav-links
+  {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-top: 10px;
+  }
+  nav img{
+    border-radius: 50% ;
+  }
+
+  
+  nav li{
+  margin-right: 20px;
+  }
+
+  header .Clip , header .Menubar{
+    visibility: hidden;
+    display: none;
+  }
+
+  .noResult{
+    width: 60vw;
+  }
+
   .RepoContainer{
       width: 100%;
-      display: grid;
-      grid-template-columns: auto auto auto ;
-      grid-gap: 50px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       justify-content: center;
-      margin: 120px 0px;
-      padding:50px 0px; ;
+      margin: 170px 0px;
   }
 
  header,
@@ -120,6 +145,7 @@
 .profile-card .img-area,
 .buttons button {
   background: #ecf0f3;
+  border: 2px solid rgb(58, 87, 140);
   box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
 }
 
@@ -132,17 +158,24 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 0 25px 50px 25px ; 
   transition: 0.4s ease;
 }
 
-
-.profile-card:hover {
+ nav img:hover,
+.profile-card:hover, 
+.profile-card:hover .img-area {
     transform: scale(1.1);
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
   }
 
 .profile-card .img-area {
   height: 150px;
   width: 150px;
+  transition: 0.4s ease;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -152,6 +185,7 @@
 .img-area .inner-area {
   height: calc(100% - 25px);
   width: calc(100% - 25px);
+  border: 2px solid rgb(162, 195, 255);
   border-radius: 50%;
 }
 
@@ -190,7 +224,8 @@
   box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
 }
 
-.buttons button:hover:before {
+.buttons button:hover:before
+ {
   z-index: -1;
   border-radius: 5px;
 }
@@ -268,3 +303,116 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+
+@media only screen and (max-width: 550px) {
+  header .navPCview{
+    visibility: hidden;
+  }
+  input {
+    min-width:250px;
+    width:55vw;
+  }
+  header .Clip{
+    position: absolute;
+    z-index: 7;
+    min-width: 370px;
+    width:100vw;
+    height: 98px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    visibility: visible;
+    background-color: rgb(116, 165, 255);
+    clip-path: circle(0px at 87% 50%);
+    -webkit-clip-path: circle(0px at 87% 50%);
+    transition: all 0.8s ease-out ;
+  }
+
+
+   header .Menubar{
+    visibility: visible;
+    position: absolute;
+    z-index: 7;
+    right: 4%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 8px 15px 8px 8px ;
+    margin: 10px 5px 10px 0px ;
+    cursor: pointer;
+    border-radius: 50%;
+    background: linear-gradient(-45deg, rgba(70, 102, 184, 0.22), rgba(149, 186, 255, 0.25));
+    box-shadow: 
+    15px 0px 20px 0px rgba(58, 127, 255, 0.516) inset,
+    -10px 0px 20px 12px rgba(162, 195, 255, 0.242) inset
+    ,0px 0px 1px 7px rgb(152, 189, 255);
+    transition: all .1s .7s  ease ;
+  }
+  
+  .menu{
+    position: absolute;
+    width: 25px;
+    height: 7px;
+    transform-origin: center center;
+    border: 1px solid rgb(23, 32, 46);
+    background: #ecf0f3;
+    margin: 3px 0px;
+    transition: all 0s .7s  ease ;
+  }
+  
+   #bar1{
+    top: 12px;
+    transform: rotate(-44deg);
+    
+  }
+  
+   #bar2{
+    bottom: 12px;
+    transform: rotate(44deg);
+  }
+  header .Closebar{
+      padding: 8px 10px 8px 9px !important;
+      transition: all 0s ease !important;
+  }
+  header .Closebar::before
+ {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  background: #ecf0f3;
+  box-shadow: inset -3px -3px 7px #ffffff, 
+  inset 3px 3px 5px #ceced1;
+}
+
+ .togglebar1 {
+    top: 16px !important;
+    transform: rotate(-48deg) !important;
+    background: rgb(154, 199, 255) !important;
+    transition: all .2s  ease !important ;
+
+  }
+  
+  .togglebar2 {
+    bottom: 20px !important;
+    transform: rotate(44deg) !important;
+    background: rgb(154, 199, 255) !important;
+    transition: all .2s  ease !important ;
+  }
+  
+  
+  header .OpenClip{
+    clip-path: circle(190vw at 100% 50%);
+    -webkit-clip-path: circle(190vw at 100% 50%);
+   }
+
+}
+

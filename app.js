@@ -3,8 +3,19 @@ const form = document.getElementById("form");
 const search = document.getElementById("search");
 const showApiData = document.getElementById("apiData");
 const loaderBar = document.getElementById("loader");
-const bodyoverflow = document.getElementsByTagName('body')[0]
+const hamburger = document.querySelector(".Menubar");
+const clipPath = document.querySelector(".Clip");
+const Navbar1 = document.querySelector("#bar1");
+const Navbar2  = document.querySelector("#bar2");
 
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("Closebar")
+    clipPath.classList.toggle("OpenClip")
+    Navbar1.classList.toggle("togglebar1")
+    Navbar2.classList.toggle("togglebar2")
+  })
+  
 
 window.onload = function () {
     getTrendingListOfRepositories()
@@ -23,8 +34,8 @@ async function getTrendingListOfRepositories() {
         .then((data) => {
             console.log(data)
             const apiTrendingData = data.items
-            loaderBar.classList.add("hideloader")
             showApiData.innerHTML = apiTrendingData.map(datashow).join("")
+            removeloader()
 
         })
         .catch((err) => {
@@ -42,9 +53,18 @@ async function searchRepository(userQuery) {
 
             console.log(data)
             const apiData = data.items
-            removeloader()
-            showApiData.innerHTML = apiData.map(datashow).join("")
 
+            if (apiData.length == 0) {
+                showApiData.innerHTML =
+                    `
+                    <img class="noResult" src="assets/SearchNotFound.svg" alt="Search Not Found">
+                    `
+                console.log("page not found")
+            }
+            else{
+            showApiData.innerHTML = apiData.map(datashow).join("")
+            }
+            removeloader()
         })
         .catch((err) => {
 
@@ -54,12 +74,10 @@ async function searchRepository(userQuery) {
 
 
 function addloader() {
-    bodyoverflow.classList.add("stop-scrolling");
     loaderBar.classList.remove("hideloader")
 };
 
 function removeloader() {
-    bodyoverflow.classList.remove("stop-scrolling");
     loaderBar.classList.add("hideloader");
 };
 
