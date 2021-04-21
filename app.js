@@ -32,7 +32,6 @@ async function getTrendingListOfRepositories() {
             return response.json()
         })
         .then((data) => {
-            console.log(data)
             const apiTrendingData = data.items
             removeloader()
             showApiData.innerHTML = apiTrendingData.map(datashow).join("")
@@ -50,7 +49,6 @@ async function searchRepository(userQuery) {
         })
         .then((data) => {
 
-            console.log(data)
             const apiData = data.items
             removeloader()
             if (apiData.length == 0) {
