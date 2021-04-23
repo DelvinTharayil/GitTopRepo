@@ -304,6 +304,15 @@
   pointer-events: auto;
 }
 
+header .Menubar,
+nav .nav-links,
+.profile-card
+{
+-webkit-tap-highlight-color: transparent !important;
+outline: none !important;
+-ms-touch-action: manipulation !important;
+touch-action: manipulation !important;
+}
 
 @media only screen and (max-width: 550px) {
   header .navPCview{
